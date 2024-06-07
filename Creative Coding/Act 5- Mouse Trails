@@ -1,0 +1,28 @@
+let trail = [];
+let maxTrailSize = 50;
+
+function setup() {
+  createCanvas(800, 600);
+  noCursor();
+}
+
+function draw() {
+  background(0);
+
+  trail.push({ x: mouseX, y: mouseY, color: getRandomColor() });
+
+  if (trail.length > maxTrailSize) {
+    trail.shift();
+  }
+
+  for (let i = 0; i < trail.length; i++) {
+    let pos = trail[i];
+    fill(pos.color);
+    noStroke();
+    ellipse(pos.x, pos.y, 20, 20);
+  }
+}
+
+function getRandomColor() {
+  return color(random(255), random(255), random(255));
+}
