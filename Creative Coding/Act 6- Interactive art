@@ -1,0 +1,43 @@
+let circles = [];
+
+function setup() {
+  createCanvas(800, 600);
+  noStroke();
+}
+
+function draw() {
+  background(100);
+
+  for (let i = 0; i < circles.length; i++) {
+    let c = circles[i];
+    fill(c.color);
+    ellipse(c.x, c.y, c.size);
+    
+    c.size += c.growth;
+
+    if (c.size > c.maxSize || c.size < c.minSize) {
+      c.growth *= -1;
+    }
+  }
+}
+
+function mousePressed() {
+
+  let newCircle = {
+    x: mouseX,
+    y: mouseY,
+    size: 10,
+    growth: random(0.5, 2),
+    maxSize: random(100, 150),
+    minSize: 10,
+    color: color(random(255), random(255), random(255))
+  };
+  circles.push(newCircle);
+}
+
+function mouseMoved() {
+  let newColor = color(mouseX % 255, mouseY % 255, 255);
+  for (let i = 0; i < circles.length; i++) {
+    circles[i].color = newColor;
+  }
+}
